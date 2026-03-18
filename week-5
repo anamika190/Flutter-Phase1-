@@ -1,0 +1,39 @@
+import 'package:flutter/material.dart';
+void main(){runApp(const MyApp());}
+class MyApp extends StatelessWidget{
+const MyApp({super.key});
+Widget build(BuildContext context){
+return const MaterialApp(home:RecipeList());
+}}
+class RecipeList extends StatelessWidget{
+const RecipeList({super.key});
+final List<Map<String,String>> recipes=const[
+{"title":"Omelet","desc":"1. Crack eggs\n2. Beat eggs\n3. Heat pan\n4. Pour eggs\n5. Cook both sides\n6. Serve hot"},
+];
+Widget build(BuildContext context){
+return Scaffold(
+appBar:AppBar(title:const Text("Recipes")),
+body:ListView.builder(
+itemCount:recipes.length,
+itemBuilder:(context,index){
+return ListTile(
+title:Text(recipes[index]["title"]!),
+onTap:(){
+Navigator.push(context,MaterialPageRoute(
+builder:(context)=>RecipeDetail(recipe:recipes[index]),
+));
+},
+);
+},
+),
+);
+}}
+class RecipeDetail extends StatelessWidget{
+final Map<String,String> recipe;
+const RecipeDetail({super.key,required this.recipe});
+Widget build(BuildContext context){
+return Scaffold(
+appBar:AppBar(title:Text(recipe["title"]!)),
+body:Center(child:Text(recipe["desc"]!)),
+);
+}}
