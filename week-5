@@ -8,7 +8,7 @@ return const MaterialApp(home:RecipeList());
 class RecipeList extends StatelessWidget{
 const RecipeList({super.key});
 final List<Map<String,String>> recipes=const[
-{"title":"Omelet","desc":"1. Crack eggs\n2. Beat eggs\n3. Heat pan\n4. Pour eggs\n5. Cook both sides\n6. Serve hot"},
+{"title":"Omelet","desc":"1. Crack eggs\n2. Beat eggs\n3. Heat pan\n4. Pour eggs\n5. Cook both sides\n6. Serve"},
 ];
 Widget build(BuildContext context){
 return Scaffold(
