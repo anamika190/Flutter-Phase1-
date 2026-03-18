@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+void main(){runApp(const MyApp());}
+class MyApp extends StatelessWidget{
+const MyApp({super.key});
+Widget build(BuildContext context){
+return const MaterialApp(home:FormScreen());
+}}
+class FormScreen extends StatefulWidget{
+const FormScreen({super.key});
+State<FormScreen> createState()=>_FormScreenState();
+}
+class _FormScreenState extends State<FormScreen>{
+final _formKey=GlobalKey<FormState>();
+final nameController=TextEditingController();
+final emailController=TextEditingController();
+bool agree=false;
+DateTime? selectedDate;
+Widget build(BuildContext context){
+return Scaffold(
+appBar:AppBar(title:const Text("Register")),
+body:Padding(
+padding:const EdgeInsets.all(16),
+child:Form(
+key:_formKey,
+child:Column(
+children:[
+TextFormField(
+controller:nameController,
+decoration:const InputDecoration(labelText:"Name"),
+validator:(value)=>value!.isEmpty?"Enter name":null,
+),
+TextFormField(
+controller:emailController,
+decoration:const InputDecoration(labelText:"Email"),
+validator:(value)=>value!.isEmpty?"Enter email":null,
+),
+Row(
+children:[
+Checkbox(
+value:agree,
+onChanged:(value){
+setState(()=>agree=value!);
+},
+),
+const Text("Agree"),
+],
+),
+ElevatedButton(
+onPressed:()async{
+DateTime? picked=await showDatePicker(
+context:context,
+initialDate:DateTime.now(),
+firstDate:DateTime(2000),
+lastDate:DateTime(2100),
+);
+if(picked!=null){setState(()=>selectedDate=picked);}
+},
+child:Text(selectedDate==null?"Pick Date":selectedDate.toString()),
+),
+ElevatedButton(
+onPressed:(){
+if(_formKey.currentState!.validate()&&agree&&selectedDate!=null){
+ScaffoldMessenger.of(context).showSnackBar(
+const SnackBar(content:Text("Success")),
+);
+}
+},
+child:const Text("Submit"),
+),
+],
+),
+),
+),
+);
+}
+}
