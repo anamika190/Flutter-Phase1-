@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+void main() {
+  runApp(const MyApp());
+}
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: ProfileCard(),
+    );
+  }
+}
+class ProfileCard extends StatelessWidget {
+  const ProfileCard({super.key});
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Profile Card"),
+      ),
+      body: Center(
+        child: Card(
+          elevation: 5,
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            width: 300,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const CircleAvatar(
+                  radius: 40,
+                  backgroundImage: NetworkImage(
+                    'https://i.pravatar.cc/150?img=3',
+                  ),
+                ),
+                const SizedBox(height: 10),
+                const Text(
+                  "John",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 5),
+                const Text("Engineer"),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: const [
+                    Column(
+                      children: [
+                        Text("Posts"),
+                        Text("20"),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text("Followers"),
+                        Text("150"),
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Text("Following"),
+                        Text("100"),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        child: const Text("Follow"),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
